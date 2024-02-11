@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <future>
 using namespace std;
 string temp = "";
 int temp2;
@@ -49,11 +50,12 @@ void cleararray() {
     cout << "Array has been cleared of all strings." << endl;
 }
 
-void grabstring() {
+bool grabstring() {
     cout << "Enter a string: " << endl;
     getline(cin, temp);
     cout << temp << endl;
     storage.push_back(temp);
+    return true;
 }
 
 
@@ -75,11 +77,18 @@ void printmenu() {
         printmenu();
         break;
     case 2:
+    {
         cout << "grab string" << endl;
-        grabstring();
-        cout << "print menu" << endl;
-        printmenu();
+        std::future<bool> fut = std::async(grabstring);
+        bool ret = fut.get();
+        if (ret) {
+            printmenu();
+        }
+        else {
+            cout << "out";
+        }
         break;
+    }
     case 3:
         deletestring();
         printmenu();
@@ -105,27 +114,4 @@ void printmenu() {
 int main()
 {
     printmenu();
-//initialize
-    //string result;
-    //string* resultptr = &result;
-    //string value = *resultptr;
-    //cout << resultptr << endl;
-    //cout << value << endl;
-    //if (result.length() >= 0) {
-    //    result = grabstring();
-    //}
-    //else {
-    //    printmenu();
-    //}
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
