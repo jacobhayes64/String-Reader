@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <future>
+#include <limits>
+#include <ios>
 using namespace std;
 string temp = "";
 int temp2;
@@ -18,7 +20,7 @@ void killprogram() {
 }
 
 int printarray() {
-    cout << "Array" << endl;
+    cout << "....." << endl;
     if (storage.size() > 0) {
         for (int i = 0; i <= storage.size() - 1; i++) {
             cout << i << ") " << storage[i] << endl;
@@ -52,8 +54,8 @@ void cleararray() {
 
 bool grabstring() {
     cout << "Enter a string: " << endl;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, temp);
-    cout << temp << endl;
     storage.push_back(temp);
     return true;
 }
@@ -78,14 +80,13 @@ void printmenu() {
         break;
     case 2:
     {
-        cout << "grab string" << endl;
         std::future<bool> fut = std::async(grabstring);
         bool ret = fut.get();
         if (ret) {
             printmenu();
         }
         else {
-            cout << "out";
+            cout << "ERROR NO STRING";
         }
         break;
     }
@@ -105,6 +106,7 @@ void printmenu() {
         break;
     default:
         cout << "Enter a valid option" << endl;
+        printmenu();
         break;
 
     }
