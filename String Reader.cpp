@@ -20,13 +20,15 @@ void killprogram() {
 }
 
 int printarray() {
-    cout << "....." << endl;
+    cout << "Storage array: " << endl;
     if (storage.size() > 0) {
         for (int i = 0; i <= storage.size() - 1; i++) {
             cout << i << ") " << storage[i] << endl;
         }
     }
     else { cout << "No strings exist" << endl; }\
+
+    cout << endl;
 
     return storage.size();
 }
@@ -35,12 +37,12 @@ void deletestring() {
     if (storage.size() > 0) {
         int pos;
         cout << "Which string should be deleted?" << endl;
-        int max = printarray();
+        //int max = printarray();
         cin >> pos;
         string temp3 = storage[pos];
         storage.erase(storage.begin()+pos);
         cout << "String at position " << pos << " has been deleted." << endl;
-        cout << "The value of the string: " << temp3 << endl;
+        cout << "The value of the string: " << temp3 << endl << endl;
         
 
 
@@ -57,20 +59,20 @@ bool grabstring() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, temp);
     storage.push_back(temp);
+    cout << endl;
     return true;
 }
 
 
  int grabinput() {
+     cin.clear();
     cin >> temp2;
     cin.clear();
     return temp2;
 }
 
 void printmenu() {
-    //cout << "A string is already loaded on the computers memory" << endl << "What would you like to do?" << endl << endl;
-    cout << "(1) View input(s)\n(2) Add new input\n(3) Delete input\n(4) Clear inputs\n(5) Next page\n(6) Exit program" << endl;
-        //await input
+    cout << "....." << endl << "(1) View input(s)\n(2) Add new input\n(3) Delete input\n(4) Clear inputs\n(5) Next page\n(6) Exit program" << endl << "....." << endl;
     int menuinput = grabinput();
     cout << endl;
     switch (menuinput) {
@@ -110,6 +112,8 @@ void printmenu() {
         break;
 
     }
+    //purge menu input
+    menuinput = NULL;
 }
 
 
