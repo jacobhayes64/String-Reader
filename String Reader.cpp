@@ -11,9 +11,6 @@ string temp = "";
 int temp2;
 vector<string> storage;
 
-void printmenu2() {
-    cout << "placeholder for page 2";
-}
 
 void killprogram() {
     exit(1);
@@ -37,7 +34,7 @@ void deletestring() {
     if (storage.size() > 0) {
         int pos;
         cout << "Which string should be deleted?" << endl;
-        //int max = printarray();
+        int max = printarray();
         cin >> pos;
         string temp3 = storage[pos];
         storage.erase(storage.begin()+pos);
@@ -72,7 +69,7 @@ bool grabstring() {
 }
 
 void printmenu() {
-    cout << "....." << endl << "(1) View input(s)\n(2) Add new input\n(3) Delete input\n(4) Clear inputs\n(5) Next page\n(6) Exit program" << endl << "....." << endl;
+    cout << "....." << endl << "(1) View input(s)\n(2) Add new input\n(3) Delete input\n(4) Clear inputs\n(5) Exit program" << endl << "....." << endl;
     int menuinput = grabinput();
     cout << endl;
     switch (menuinput) {
@@ -101,9 +98,6 @@ void printmenu() {
         printmenu();
         break;
     case 5:
-        printmenu2();
-        break;
-    case 6:
         killprogram();
         break;
     default:
